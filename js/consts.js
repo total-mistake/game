@@ -1,4 +1,4 @@
-const plantsPath = "./elements/light/";
+const plantsPath = "./elements/level-1/";
 const plants = [
     {
         pot: false

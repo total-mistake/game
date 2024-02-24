@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/menu.css" />
     <link rel="stylesheet" href="styles/general.css" />
-    <title>Find figure</title>
+    <title>Figures</title>
 </head>
 <body>
     <div class="container">
-        <div class="menu hidden">
-            <input class="menu_item" type="text" id="user_name" placeholder="Имя игрока">
-            <button class="menu_item" id="start" onclick="startGame()">Начать</button>
-            <button class="menu_item" id="level_selection">Выбрать уровень</button>
-            <button class="menu_item" id="stats">Статистика</button>
-        </div>
-        <div class="levels_menu">
+            <div class="menu" id="menu">
+                <input class="menu_item" type="text" id="user_name" placeholder="Имя игрока">
+                <button class="menu_item" id="start" onclick="startGame()" type="submit">Начать</button>
+                <button class="menu_item" id="level_selection" type="submit">Выбрать уровень</button>
+                <button class="menu_item" id="stats">Статистика</button>
+            </div>
+        <div class="levels_menu hidden" id="levels_menu">
             <p class="levels_header">Выберите уровень:</p>
             <div class="levels">
-                <button class="level" id="level-1">Легкий</button>
-                <button class="level" id="level-2">Средний</button>
-                <button class="level" id="level-3">Сложный</button>
+                <button class="level" id="level-1">Первый</button>
+                <button class="level" id="level-2">Второй</button>
+                <button class="level" id="level-3">Третий</button>
             </div>
         </div>
     </div>
-    <!-- <script src="js/main.js"></script> -->
+    <script src="js/main.js"></script>
 </body>
 </html>
