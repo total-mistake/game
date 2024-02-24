@@ -1,0 +1,21 @@
+:root{
+    --coral-color: #DB6C4E;
+    --dark-coral-color: #C45539;
+    --light-coral-color: #E5815D;
+    --beige-color: #EDE0CD;
+    --text-color: #763525;
+}
+
+@font-face {
+    font-family: neucha;
+    src: url(../fonts/neucha.ttf);
+}
+
+*{
+    font-family: neucha;
+    font-weight: 550;
+}
+
+.hidden {
+    display: none !important;
+}

@@ -1,0 +1,98 @@
+body{
+    background-image: url('../backgroundImages/menu.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+    font-size: 25px;
+}
+
+.container{
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+button, input{
+    background-color: var(--dark-coral-color);
+    font-size: 1em;
+    color: var(--beige-color);
+    border-radius: 30pt;
+    border: 0;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 22%;
+    min-width: 230px;
+    height: 100%;
+}
+
+.menu_item{
+    height: 20%;
+    min-height: 45px;
+    flex-grow: 1;
+}
+
+button:hover, input:hover{
+    opacity: 0.7;
+    color: var(--text-color);
+}
+
+button{
+    cursor: pointer;
+}
+
+input{
+    padding: 0 15px;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #ede0cdcb;
+}
+
+input:focus {
+    outline: none;
+}
+
+.levels_menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+
+.levels_header{
+    text-align: center;
+    font-weight: 800;
+    font-size: 2em;
+    color: var(--text-color);
+    margin: 8% 0;
+}
+
+.levels{
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    height: 21%;
+    width: 100%;
+}
+
+.level{
+    flex-grow: 1;
+}
+
