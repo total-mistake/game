@@ -1,13 +1,11 @@
 body{
-    background-image: url('../backgroundImages/stats.jpg');
+    background-image: url('../backgroundImages/menu.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: hidden;
-    /* overflow-y: hidden; */
     align-items: center;
     justify-content: center;
 }
@@ -28,7 +26,7 @@ html, body{
 
 .stats_header{
     font-size: 1.8em;
-    color: var(--spruce-color);
+    color: var(--text-color);
     margin: 3% 0;
     font-weight: 800;
 }

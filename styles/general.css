@@ -6,11 +6,6 @@
     --beige-color: #EDE0CD;
     --text-color: #763525;
     /* Рейтинг */
-    --green-blue-color: #7BB1A3;
-    --brown-color: #E0B477;
-    --blue-color: #677E8E;
-    --teal-color: #7BB1A3;
-    --spruce-color: #324B56;
 }
 
 @font-face {
@@ -45,4 +40,9 @@ a{
 
 p{
     margin: 8% 0;
+}
+
+body{
+    overflow-y: hidden;
+    overflow-x: hidden;
 }

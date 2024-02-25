@@ -20,11 +20,10 @@ $('level_selection').addEventListener('click', ()=>{
     }
 })
 
-addPlayerStats(userStats);
 function addPlayerStats(userStats) {
     // Получение текущего массива данных из localStorage
     const storedAllUsersStats = localStorage.getItem('UsersStats');
-    let allUsersStats = storedAllUsersStats ? JSON.parse(storedAllUsersStats) : [];
+    let allUsersStats = JSON.parse(storedAllUsersStats) || [];
 
     // Поиск игрока по имени в массиве
     const existingPlayerIndex = allUsersStats.findIndex(user => user.name === userStats.name);

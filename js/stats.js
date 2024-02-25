@@ -5,12 +5,9 @@ showRating();
 //Вывод рейтинга игроков (только первые 4 в рейтинге)
 function showRating() {
     const storedAllUsersStats = localStorage.getItem('UsersStats');
-    let allUsersStats = storedAllUsersStats ? JSON.parse(storedAllUsersStats) : [];
-
-    //Если массив пустой
-    if (!allUsersStats.length) {
-        document.getElementById('st_header').textContent = "Рейтинг игроков пуст";
-    } else {
+    let allUsersStats = JSON.parse(storedAllUsersStats) || [];
+    console.log(allUsersStats);
+    if (allUsersStats.length > 0) {
         for (let i = 0; i < 4; i++) {
             const currentUser = allUsersStats[i];
             document.getElementById('rating').insertAdjacentHTML('beforeend',
@@ -20,5 +17,9 @@ function showRating() {
                 </div>`
             )
         }
+        
+    } else {
+        //Если массив пустой
+        document.getElementById('st_header').textContent = "Рейтинг игроков пуст";
     }
 }
