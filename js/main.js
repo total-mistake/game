@@ -19,10 +19,7 @@ $('level_selection').addEventListener('click', ()=>{
         , 1000);
     }
 })
-userStats = {
-    name: "test5",
-    points: [5, 1, 3]
-}
+
 addPlayerStats(userStats);
 function addPlayerStats(userStats) {
     // Получение текущего массива данных из localStorage
@@ -44,7 +41,7 @@ function addPlayerStats(userStats) {
         // Добавление нового игрока
         allUsersStats.push(userStats);
     }
-
+    
     console.log(arraySorting(allUsersStats));
     // Сохранение обновленного массива в localStorage
     localStorage.setItem('UsersStats', JSON.stringify(arraySorting(allUsersStats)));
