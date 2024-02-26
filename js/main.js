@@ -6,7 +6,7 @@ let userStats = {};
 $('level_selection').addEventListener('click', ()=>{
     userStats.name = $("user_name").value;
     if(userStats.name) {
-        $('menu').classList.add('hidden');
+        menu.classList.add('hidden');
         $('levels_menu').classList.remove('hidden');
         document.querySelector("body").insertAdjacentHTML('afterbegin',
         `<header class="header">
@@ -19,6 +19,19 @@ $('level_selection').addEventListener('click', ()=>{
         , 1000);
     }
 })
+
+Array.from(levels.children).forEach(function(child) {
+    console.log(child.textContent); // Пример: вывод текстового содержимого дочернего элемента
+});
+
+$('level-1').addEventListener('click', ()=>{
+    window.location.href = 'game.html';
+    
+})
+
+function showLevel1() {
+
+}
 
 function addPlayerStats(userStats) {
     // Получение текущего массива данных из localStorage
