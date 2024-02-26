@@ -1,38 +1,27 @@
 "use strict"
 
-const $ = document.getElementById.bind(document);
 let userStats = {};
 
-$('level_selection').addEventListener('click', ()=>{
-    userStats.name = $("user_name").value;
+//Из URL получаем данные о выбранном уровне
+var searchParams = new URLSearchParams(window.location.search);
+var level = searchParams.get('level');
+// console.log('Уровень:', level);
+
+//Авторизация игрока (ввод имени)
+function authorization() {
+    userStats.name = user_name.value;
+
     if(userStats.name) {
-        menu.classList.add('hidden');
-        $('levels_menu').classList.remove('hidden');
-        document.querySelector("body").insertAdjacentHTML('afterbegin',
-        `<header class="header">
-            <a href="index.html"><img class="icon_home" src="./elements/icons/home_icon.png"></a>
-        </header>`)
+        
     } else {
-        $('user_name').classList.add('shaking');
+        user_name.classList.add('shaking');
         setTimeout(()=>
-            $('user_name').classList.remove('shaking')
+        user_name.classList.remove('shaking')
         , 1000);
     }
-})
-
-Array.from(levels.children).forEach(function(child) {
-    console.log(child.textContent); // Пример: вывод текстового содержимого дочернего элемента
-});
-
-$('level-1').addEventListener('click', ()=>{
-    window.location.href = 'game.html';
-    
-})
-
-function showLevel1() {
-
 }
 
+//Добавление статистики игрока
 function addPlayerStats(userStats) {
     // Получение текущего массива данных из localStorage
     const storedAllUsersStats = localStorage.getItem('UsersStats');
@@ -59,6 +48,7 @@ function addPlayerStats(userStats) {
     localStorage.setItem('UsersStats', JSON.stringify(arraySorting(allUsersStats)));
 }
 
+//Функция сортировки массива по убыванию суммы очков
 function arraySorting(array) {
     const sortedStats = [...array];
 
@@ -72,27 +62,3 @@ function arraySorting(array) {
 
     return sortedStats;
 }
-
-function startGame() {
-    userStats.name = $("user_name").value;
-
-    if(userStats.name) {
-
-    } else {
-        $('user_name').classList.add('shaking');
-        setTimeout(()=>
-            $('user_name').classList.remove('shaking')
-        , 1000);
-    }
-    // Ваш код для начала игры
-    console.log('Игра начата');
-}
-
-function selectLevel() {
-    // Ваш код для выбора уровня
-    console.log('Выбран уровень');
-}
-
-
-
-    

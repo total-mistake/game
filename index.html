@@ -10,9 +10,8 @@
 <body>
     <div class="container">
             <div class="menu" id="menu">
-                <input class="menu_item" type="text" id="user_name" placeholder="Имя игрока">
-                <button class="menu_item" id="start" onclick="startGame()">Начать</button>
-                <button class="menu_item" id="level_selection">Выбрать уровень</button>
+                <button class="menu_item" id="start">Начать</button>
+                <button class="menu_item" onclick="levelSelection()">Выбрать уровень</button>
                 <a href="stats.html" class="menu_item" id="stats">Рейтинг</a>
             </div>
         <div class="levels_menu hidden" id="levels_menu">
@@ -24,6 +23,6 @@
             </div>
         </div>
     </div>
-    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 </html>
