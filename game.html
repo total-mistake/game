@@ -9,10 +9,17 @@
 </head>
 <body>
     <header class="header">
-        <a href="index.html"><img class="icon_home" src="./elements/icons/home_icon.png"></a>
+        <a href="index.html"><img class="icon_home"></a>
     </header>
-    <div class="container">
-        <input class="menu_item" type="text" id="user_name" placeholder="Имя игрока">
+    <form id="loginForm">
+        <p class="message">Введите имя игрока, чтобы ваша статистика сохранилась!</p>
+        <input class="login_item" type="text" id="user_name" placeholder="Имя игрока">
+        <button class="login_item" id="continue" type="submit">Продолжить</button>
+    </form>
+    <div id="level" class="hidden">
+        <p class="header" id="level_num"></p>
+        <p id="rools"></p>
+        <div class="level_field"></div>
     </div>
     <script src="js/game.js"></script>
 </body>

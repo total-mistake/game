@@ -5,20 +5,68 @@ let userStats = {};
 //Из URL получаем данные о выбранном уровне
 var searchParams = new URLSearchParams(window.location.search);
 var level = searchParams.get('level');
-// console.log('Уровень:', level);
 
-//Авторизация игрока (ввод имени)
-function authorization() {
-    userStats.name = user_name.value;
-
-    if(userStats.name) {
-        
+showStyle();
+console.log(level);
+loginForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if(user_name.value) {
+        userStats.name = user_name.value;
+        loginForm.classList.add('hidden');
+        document.getElementById('level').classList.remove('hidden');
+        startGame();
     } else {
         user_name.classList.add('shaking');
         setTimeout(()=>
         user_name.classList.remove('shaking')
         , 1000);
     }
+  });
+
+function startGame() {
+    //Алгоритм в зависимости от выбранного уровня
+    switch (level) {
+        //Если игра запущена через кнопку "Начать"
+        case 0:
+        
+            break;
+        //Уровень 1
+        case 1:
+            firstLevel();
+            break;
+        //Уровень 2
+        case 2:
+            secondLevel();
+            break;
+        //Уровень 3
+        case 3:
+            thirdLevel();
+            break;
+    }
+
+    // addPlayerStats(userStats)
+}
+
+function firstLevel() {
+    level_num.textContent = `Уровень 1`;
+    rools.textContent = "Найди все цветы в горшочках";
+}
+
+function secondLevel() {
+    level_num.textContent = `Уровень 2`;
+    rools.textContent = "Найди все цветы в горшочках";
+}
+
+function thirdLevel() {
+    level_num.textContent = `Уровень 3`;
+    rools.textContent = "Найди все цветы в горшочках";
+}
+//Оформление страницы
+function showStyle() {
+    let lvl;
+    if (level == 0) {lvl = 1} else {lvl = level }
+    document.body.style.backgroundImage = `url('./backgroundImages/level${lvl}.jpg')`;
+    document.querySelector('.icon_home').src = `./elements/icons/home_icon_l${lvl}.png`;
 }
 
 //Добавление статистики игрока

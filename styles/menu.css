@@ -1,17 +1,5 @@
 body{
     background-image: url('../backgroundImages/menu.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-html, body{
-    height: 100%;
-    width: 100%;
-    font-size: 25px;
 }
 
 .container{
