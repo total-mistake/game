@@ -27,7 +27,6 @@ loginForm.addEventListener('submit', function (event) {
 });
 
 function startGame() {
-    localStorage.clear();
     anew.classList.add('hidden');
     //Алгоритм в зависимости от выбранного уровня
     switch (level) {
@@ -54,8 +53,7 @@ function startGame() {
 
 function firstLevel() {
     level_num.textContent = `Уровень 1`;
-    let time = 60;
-    timeRemaining = time;
+    timeRemaining = 60;
     startTimer();
     let levelIndex = 0;
     let maxAnimationTime = [8, 5, 2];
@@ -146,7 +144,7 @@ function firstLevel() {
             }, 5000);
         } else {
             stopTimer();
-            let points = time - timeRemaining;
+            let points = timeRemaining;
             level_num.textContent = `Поздравляю! Количество набранных очков: ${points}`;
             rools.textContent = "Хочешь попробовать заново?";
             clearField();
