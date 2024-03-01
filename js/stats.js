@@ -6,6 +6,7 @@ showRating();
 function showRating() {
     const storedAllUsersStats = localStorage.getItem('UsersStats');
     let allUsersStats = JSON.parse(storedAllUsersStats) || [];
+    console.log(localStorage.getItem('UsersStats'));
     console.log(allUsersStats);
     if (allUsersStats.length > 0) {
         for (let i = 0; i < 4; i++) {

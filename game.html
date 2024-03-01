@@ -11,16 +11,25 @@
     <header class="header">
         <a href="index.html"><img class="icon_home"></a>
     </header>
-    <form id="loginForm">
+    <!-- Авторизация -->
+    <form id="loginForm" >
         <p class="message">Введите имя игрока, чтобы ваша статистика сохранилась!</p>
         <input class="login_item" type="text" id="user_name" placeholder="Имя игрока">
         <button class="login_item" id="continue" type="submit">Продолжить</button>
     </form>
     <div id="level" class="hidden">
-        <p class="header" id="level_num"></p>
-        <p id="rools"></p>
-        <div class="level_field"></div>
+        <!-- Основные элементы уровня -->
+        <div id="timer"></div>
+        <p id="level_num">Уровень 1</p>
+        <p id="rools">Найди все цветы в горшочках.</p>
+        <div id="level_field"></div>
+        <!-- После завершения уровня -->
+        <div class="anew hidden" id="anew">
+            <button class="anew_button" id="no">Нет</button>
+            <button class="anew_button" onclick="startGame()">Да</button>
+        </div>
     </div>
+    <script src="js/consts.js"></script>
     <script src="js/game.js"></script>
 </body>
 </html>
