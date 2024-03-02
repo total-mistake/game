@@ -57,14 +57,14 @@ function firstLevel() {
     startTimer();
     let levelIndex = 0;
     let maxAnimationTime = [8, 5, 2];
+    let taskTypes = shuffleArray([0, 1, 2]);
 
     function generateNextLevel() {
         if (levelIndex < 3) {
             timer.classList.add('hidden');
             level_field.classList.add('hidden');
-            let taskType; //Три типа вопроса
+            let taskType = taskTypes[levelIndex];
             let taskSubtype; //Подтип вопроса
-            taskType = random(0, 2); //Три типа вопроса
             let numOfCorrectItems = 0;  //Количество правильных элементов на поле
             let arrayOfElements = creatingArrayOfElements(24);
             switch (taskType) {
@@ -242,7 +242,6 @@ function addPlayerStats(userStats) {
         allUsersStats.push(userStats);
     }
     
-    console.log(arraySorting(allUsersStats));
     // Сохранение обновленного массива в localStorage
     localStorage.setItem('UsersStats', JSON.stringify(arraySorting(allUsersStats)));
 }
@@ -334,4 +333,13 @@ function randomFloat(min, max) {
     let roundedNumber = Math.round(randomNumber * 10) / 10;
 
     return roundedNumber;
+}
+
+//Перемешивание массива
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
