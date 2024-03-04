@@ -7,7 +7,7 @@ let userStats = {};
 //Из URL получаем данные о выбранном уровне
 var searchParams = new URLSearchParams(window.location.search);
 var level = searchParams.get('level');
-var factLevel = '1'; //Фактический уровень
+var factLevel = level; //Фактический уровень
 var timeRemaining; //Начальное значение таймера
 var timerInterval;
 var updateInterval;
@@ -31,8 +31,6 @@ loginForm.addEventListener('submit', function (event) {
 function startGame() {
     //Алгоритм в зависимости от выбранного уровня
     switch (factLevel) {
-        //Если игра запущена через кнопку "Начать"
-        case '0':
         //Уровень 1
         case '1':
             firstLevel();
@@ -49,6 +47,7 @@ function startGame() {
 }
 
 function firstLevel() {
+    anew.classList.add('hidden');
     level_num.textContent = `Уровень 1`;
     timeRemaining = 60;
     startTimer();
@@ -142,17 +141,21 @@ function firstLevel() {
         } else {
             stopTimer();
             let points = timeRemaining;
-            endOfGame(points, 0, 0);
-            //Если нужно запустить уровень 2
+
             if(level == 0) {
-                factLevel++;
-                askToProceed();
+                factLevel = '2';
+                assignment.textContent = "Хочешь перейти ко второму уровню?";
+            } else {
+                assignment.textContent = "Хочешь попробовать заново?";
             }
+            endOfGame(points, 0, 0)
     }}
     generateNextLevel();
 }
 
 function secondLevel() {
+    anew.classList.add('hidden');
+    showStyle();
     level_num.textContent = `Уровень 2`;
     assignment.textContent = "Трижды найди и кликни на этот цветок:";
     timeRemaining = 60;
@@ -221,21 +224,11 @@ function thirdLevel() {
 
 function endOfGame(pointslvl1, pointslvl2, pointslvl3) {
     level_num.textContent = `Поздравляю! Количество набранных очков: ${pointslvl1 + pointslvl2 + pointslvl3}`;
-    assignment.textContent = "Хочешь попробовать заново?";
-    clearField();
     timer.classList.add('hidden');
     level_field.classList.add('hidden');
     anew.classList.remove('hidden');
     userStats.points = [pointslvl1, pointslvl2, pointslvl3];
     addPlayerStats(userStats);
-}
-
-function askToProceed() {
-    assignment.textContent = "Хочешь перейти ко второму уровню?";
-    anew.onclick = function () {
-        level = '2';
-        startGame();
-    }
 }
 
 $('no').addEventListener('click', ()=>{
@@ -244,6 +237,7 @@ $('no').addEventListener('click', ()=>{
 
 //Оформление страницы
 function showStyle() {
+    if(factLevel == 0) { factLevel = '1'; }
     document.body.style.backgroundImage = `url('./backgroundImages/level${factLevel}.jpg')`;
     document.querySelector('.icon_home').src = `./elements/icons/home_icon_l${factLevel}.png`;
 }
@@ -441,22 +435,12 @@ function randomFloat(min, max) {
 function shuffleArray(array) {
     let currentIndex = array.length, randomIndex;
 
-    // While there remain elements to shuffle...
     while (currentIndex !== 0) {
-
-        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
-        // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
 
     return array;
-
-    // for (let i = array.length - 1; i > 0; i--) {
-    //     const j = Math.floor(Math.random() * (i + 1));
-    //     [array[i], array[j]] = [array[j], array[i]];
-    // }
-    // return array;
 }
