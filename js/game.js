@@ -7,11 +7,12 @@ let userStats = {};
 //Из URL получаем данные о выбранном уровне
 var searchParams = new URLSearchParams(window.location.search);
 var level = searchParams.get('level');
+var factLevel = '1'; //Фактический уровень
 var timeRemaining; //Начальное значение таймера
 var timerInterval;
 var updateInterval;
 
-showStyle(level);
+showStyle();
 loginForm.addEventListener('submit', function (event) {
     event.preventDefault();
     if(user_name.value) {
@@ -28,17 +29,13 @@ loginForm.addEventListener('submit', function (event) {
 });
 
 function startGame() {
-    anew.classList.add('hidden');
     //Алгоритм в зависимости от выбранного уровня
-    switch (level) {
+    switch (factLevel) {
         //Если игра запущена через кнопку "Начать"
         case '0':
-            firstLevel();
-            break;
         //Уровень 1
         case '1':
             firstLevel();
-            
             break;
         //Уровень 2
         case '2':
@@ -67,7 +64,6 @@ function firstLevel() {
             let arrayOfElements = [];
             let taskSubtype; //Подтип вопроса
             let numOfCorrectItems = 0;  //Количество правильных элементов на поле
-
             switch (taskType) {
                 case 0:
                     taskSubtype = animalTypes[random(0, animalTypes.length - 1)];
@@ -85,7 +81,7 @@ function firstLevel() {
 
             //Если нет ни одного элемента запускаем заново
             while(numOfCorrectItems == 0) {
-                let arrayOfElements = creatingArrayOfElementslvl1(24);
+                arrayOfElements = creatingArrayOfElementslvl1(24);
                 
                 // Узнаем сколько элементов на поле соответствует условию
                 arrayOfElements.forEach(element => {
@@ -148,14 +144,11 @@ function firstLevel() {
             let points = timeRemaining;
             endOfGame(points, 0, 0);
             //Если нужно запустить уровень 2
-            // if(level == 0) {
-            //     assignment.textContent = "Хочешь перейти ко второму уровню?";
-            //     anew.onclick = function() {
-            //         secondLevel();
-            //     }
-            // }
+            if(level == 0) {
+                factLevel++;
+                askToProceed();
+            }
     }}
-
     generateNextLevel();
 }
 
@@ -237,15 +230,22 @@ function endOfGame(pointslvl1, pointslvl2, pointslvl3) {
     addPlayerStats(userStats);
 }
 
+function askToProceed() {
+    assignment.textContent = "Хочешь перейти ко второму уровню?";
+    anew.onclick = function () {
+        level = '2';
+        startGame();
+    }
+}
+
 $('no').addEventListener('click', ()=>{
     window.location.href = 'index.html';
 });
 
 //Оформление страницы
-function showStyle(lvl) {
-    if (lvl == 0) {lvl = 1}
-    document.body.style.backgroundImage = `url('./backgroundImages/level${lvl}.jpg')`;
-    document.querySelector('.icon_home').src = `./elements/icons/home_icon_l${lvl}.png`;
+function showStyle() {
+    document.body.style.backgroundImage = `url('./backgroundImages/level${factLevel}.jpg')`;
+    document.querySelector('.icon_home').src = `./elements/icons/home_icon_l${factLevel}.png`;
 }
 
 //Создание массива элменетов для уровня 1
