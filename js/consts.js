@@ -57,8 +57,8 @@ const plants = [
     "./elements/level-2/plant5.png",
     "./elements/level-2/plant6.png",
     "./elements/level-2/plant7.png",
+    "./elements/level-2/plant8.png",
     "./elements/level-2/plant9.png",
-    "./elements/level-2/plant10.png",
 ]
 
 const backgroundColors = [

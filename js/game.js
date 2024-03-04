@@ -9,6 +9,7 @@ var searchParams = new URLSearchParams(window.location.search);
 var level = searchParams.get('level');
 var timeRemaining; //Начальное значение таймера
 var timerInterval;
+var updateInterval;
 
 showStyle(level);
 loginForm.addEventListener('submit', function (event) {
@@ -160,7 +161,7 @@ function firstLevel() {
 
 function secondLevel() {
     level_num.textContent = `Уровень 2`;
-    assignment.textContent = "Трижды найти и кликни на этот цветок:";
+    assignment.textContent = "Трижды найди и кликни на этот цветок:";
     timeRemaining = 60;
     startTimer();
     let levelIndex = 0;
@@ -173,9 +174,7 @@ function secondLevel() {
             timer.classList.add('hidden');
             level_field.classList.add('hidden');
             let correctImg = plants[taskItems[levelIndex]];
-            console.log(taskItems);
             let wrongElements = plants.slice(0, taskItems[levelIndex]).concat(plants.slice(taskItems[levelIndex] + 1));;   //Массив, который не содержит верный элемент
-            console.log(wrongElements);
             exampleImg.src = correctImg;
             exampleImg.classList.remove('hidden');
             let arrayOfElements = creatingArrayOfElementslvl2(wrongElements, numCorrectEl[levelIndex], correctImg);
@@ -210,7 +209,7 @@ function secondLevel() {
             };
 
             // Обновляем расположение элементов каждые 3 секунды
-            const updateInterval = setInterval(updateElements, updateTime[levelIndex]);
+            updateInterval = setInterval(updateElements, updateTime[levelIndex]);
 
         } else {
             stopTimer();
@@ -399,6 +398,7 @@ function stopTimer() {
 function gameOver() {
     level_num.textContent = "Ты проиграл"
     assignment.textContent = "Хочешь попробовать заново?";
+    clearInterval(updateInterval);
     clearField();
     exampleImg.classList.add('hidden');
     timer.classList.add('hidden');
