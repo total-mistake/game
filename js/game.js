@@ -33,7 +33,6 @@ function startGame() {
         //Если игра запущена через кнопку "Начать"
         case '0':
             firstLevel();
-
             break;
         //Уровень 1
         case '1':
@@ -64,52 +63,53 @@ function firstLevel() {
             timer.classList.add('hidden');
             level_field.classList.add('hidden');
             let taskType = taskTypes[levelIndex];
+            let arrayOfElements = [];
             let taskSubtype; //Подтип вопроса
             let numOfCorrectItems = 0;  //Количество правильных элементов на поле
-            let arrayOfElements = creatingArrayOfElements(24);
+
             switch (taskType) {
                 case 0:
                     taskSubtype = animalTypes[random(0, animalTypes.length - 1)];
-                    rools.textContent = `Найди всех ${taskSubtype}.`;
+                    assignment.textContent = `Найди всех ${taskSubtype}.`;
                     break;
                 case 1:
                     taskSubtype = animalTypes2[random(0, animalTypes2.length - 1)];
-                    rools.textContent = `Найди всех животных, у которых ${taskSubtype} ноги.`;
+                    assignment.textContent = `Найди всех животных, у которых ${taskSubtype} ноги.`;
                     break;
                 case 2:
                     taskSubtype = backgroundColors[random(0, backgroundColors.length - 1)].name;
-                    rools.textContent = `Найди все изображения, у которых цвет фона ${taskSubtype}.`;
+                    assignment.textContent = `Найди все изображения, у которых цвет фона ${taskSubtype}.`;
                     break;
             }
 
-            // Узнаем сколько элементов на поле соответствует условию
-            arrayOfElements.forEach(element => {
-                switch (taskType) {
-                    case 0:
-                        if (element.type == taskSubtype) {
-                            numOfCorrectItems++;
-                            element.correct = true;
-                        } else { element.correct = false }
-                        break;
-                
-                    case 1:
-                        if (element.legs == taskSubtype) {
-                            numOfCorrectItems++;
-                            element.correct = true;
-                        } else { element.correct = false }
-                        break;
-                    case 2:
-                        if (element.colorName == taskSubtype) {
-                            numOfCorrectItems++;
-                            element.correct = true;
-                        } else { element.correct = false }
-                        break;
-                }
-            });
-
             //Если нет ни одного элемента запускаем заново
-            if(numOfCorrectItems == 0) {
-                generateNextLevel();
+            while(numOfCorrectItems == 0) {
+                let arrayOfElements = creatingArrayOfElementslvl1(24);
+                
+                // Узнаем сколько элементов на поле соответствует условию
+                arrayOfElements.forEach(element => {
+                    switch (taskType) {
+                        case 0:
+                            if (element.type == taskSubtype) {
+                                numOfCorrectItems++;
+                                element.correct = true;
+                            } else { element.correct = false }
+                            break;
+                    
+                        case 1:
+                            if (element.legs == taskSubtype) {
+                                numOfCorrectItems++;
+                                element.correct = true;
+                            } else { element.correct = false }
+                            break;
+                        case 2:
+                            if (element.colorName == taskSubtype) {
+                                numOfCorrectItems++;
+                                element.correct = true;
+                            } else { element.correct = false }
+                            break;
+                    }
+                });
             }
 
             //Добавление анимации мерцания элементов
@@ -145,37 +145,97 @@ function firstLevel() {
         } else {
             stopTimer();
             let points = timeRemaining;
-            level_num.textContent = `Поздравляю! Количество набранных очков: ${points}`;
-            rools.textContent = "Хочешь попробовать заново?";
-            clearField();
-            timer.classList.add('hidden');
-            level_field.classList.add('hidden');
-            anew.classList.remove('hidden');
-            userStats.points = [points, 0, 0];
-            addPlayerStats(userStats);
-            localStorage.getItem('UsersStats');
-            }
-    }
+            endOfGame(points, 0, 0);
+            //Если нужно запустить уровень 2
+            // if(level == 0) {
+            //     assignment.textContent = "Хочешь перейти ко второму уровню?";
+            //     anew.onclick = function() {
+            //         secondLevel();
+            //     }
+            // }
+    }}
 
     generateNextLevel();
 }
 
-function clearField() {
-    while ($('level_field').firstChild) {
-        $('level_field').removeChild($('level_field').firstChild);
-    }
-}
-
 function secondLevel() {
     level_num.textContent = `Уровень 2`;
-    rools.textContent = "Найди все цветы в горшочках";
+    assignment.textContent = "Трижды найти и кликни на этот цветок:";
+    timeRemaining = 60;
+    startTimer();
+    let levelIndex = 0;
+    let updateTime = [2000, 1000, 800];
+    let taskItems = shuffleArray([...Array(plants.length).keys()]);
+    let numCorrectEl = [1, 2, 3];
 
-    generationField(24, 'plant');
+    function nextLevelGeneration() {
+        if(levelIndex < 3) {
+            timer.classList.add('hidden');
+            level_field.classList.add('hidden');
+            let correctImg = plants[taskItems[levelIndex]];
+            console.log(taskItems);
+            let wrongElements = plants.slice(0, taskItems[levelIndex]).concat(plants.slice(taskItems[levelIndex] + 1));;   //Массив, который не содержит верный элемент
+            console.log(wrongElements);
+            exampleImg.src = correctImg;
+            exampleImg.classList.remove('hidden');
+            let arrayOfElements = creatingArrayOfElementslvl2(wrongElements, numCorrectEl[levelIndex], correctImg);
+            let numOfClicks = 0;
+
+            arrayOfElements.forEach(element => {
+                element.addEventListener('click', () => {
+                    if (element.path == correctImg) {
+                        numOfClicks++;
+                    } else { makeMistake()}
+                    if (numOfClicks == 3) {
+                        clearField();
+                        levelIndex++;
+                        clearInterval(updateInterval);
+                        nextLevelGeneration();
+                    }
+                });
+            });
+
+            delayCorrection();
+            //Задаем задержку перед выводом содержания уровня
+            setTimeout(() => {
+                timer.classList.remove('hidden');
+                level_field.classList.remove('hidden');
+                generationField(arrayOfElements);
+            }, 5000);
+
+            // Функция для обновления расположения элементов каждые, например, 3 секунды
+            const updateElements = () => {
+                arrayOfElements = shuffleArray(arrayOfElements);
+                generationField(arrayOfElements);
+            };
+
+            // Обновляем расположение элементов каждые 3 секунды
+            const updateInterval = setInterval(updateElements, updateTime[levelIndex]);
+
+        } else {
+            stopTimer();
+            exampleImg.classList.add('hidden');
+            let points = timeRemaining;
+            endOfGame(0, points, 0);
+        }
+    }
+    nextLevelGeneration();
 }
 
 function thirdLevel() {
     level_num.textContent = `Уровень 3`;
-    rools.textContent = "Найди все цветы в горшочках";
+    assignment.textContent = "Найди все цветы в горшочках";
+}
+
+function endOfGame(pointslvl1, pointslvl2, pointslvl3) {
+    level_num.textContent = `Поздравляю! Количество набранных очков: ${pointslvl1 + pointslvl2 + pointslvl3}`;
+    assignment.textContent = "Хочешь попробовать заново?";
+    clearField();
+    timer.classList.add('hidden');
+    level_field.classList.add('hidden');
+    anew.classList.remove('hidden');
+    userStats.points = [pointslvl1, pointslvl2, pointslvl3];
+    addPlayerStats(userStats);
 }
 
 $('no').addEventListener('click', ()=>{
@@ -189,7 +249,8 @@ function showStyle(lvl) {
     document.querySelector('.icon_home').src = `./elements/icons/home_icon_l${lvl}.png`;
 }
 
-function creatingArrayOfElements(numOfElement) {
+//Создание массива элменетов для уровня 1
+function creatingArrayOfElementslvl1(numOfElement) {
     //Массив элементов
     let arrayOfElements = [];
     for (let i = 0; i < numOfElement; i++) {
@@ -213,11 +274,50 @@ function creatingArrayOfElements(numOfElement) {
     return arrayOfElements;
 }
 
+function creatingArrayOfElementslvl2(wrongElements, numOfCorrectElement, correctElement) {
+    let arrayOfElements = [];
+    for (let i = 0; i < 18 - numOfCorrectElement; i++) {
+        //Создание нового элемента
+        const newElement = document.createElement('div');
+        newElement.classList.add('element');
+        newElement.style.backgroundColor = '#F5E0CF';
+        const newImg = document.createElement('img');
+        let pathImg = wrongElements[random(0, wrongElements.length - 1)];
+        newImg.src = pathImg;
+        newElement.appendChild(newImg);
+        newElement.path = pathImg;
+
+        arrayOfElements.push(newElement);
+    }
+    for(let i = 0; i < numOfCorrectElement; i++) {
+        const newElement = document.createElement('div');
+        newElement.classList.add('element');
+        newElement.style.backgroundColor = '#F5E0CF';
+        const newImg = document.createElement('img');
+        let pathImg = correctElement;
+        newImg.src = pathImg;
+        newElement.appendChild(newImg);
+        newElement.path = pathImg;
+
+        arrayOfElements.push(newElement);
+    }
+
+    return shuffleArray(arrayOfElements);
+}
+
 //Вывод элементов из массива на поле
 function generationField(array) {
+    clearField();
     array.forEach(element => {
         level_field.appendChild(element);
     });
+}
+
+//Очистка поля
+function clearField() {
+    while ($('level_field').firstChild) {
+        $('level_field').removeChild($('level_field').firstChild);
+    }
 }
 
 //Добавление статистики игрока
@@ -285,6 +385,7 @@ function makeMistake() {
     }, 500);
 }
 
+//Корректирует задержку при показе текста задания, чтобы это время не учитывалось
 function delayCorrection() {
     timeRemaining = timeRemaining + 5;
     updateTimer();
@@ -297,8 +398,9 @@ function stopTimer() {
 // Функция, вызываемая при завершении времени
 function gameOver() {
     level_num.textContent = "Ты проиграл"
-    rools.textContent = "Хочешь попробовать заново?";
+    assignment.textContent = "Хочешь попробовать заново?";
     clearField();
+    exampleImg.classList.add('hidden');
     timer.classList.add('hidden');
     level_field.classList.add('hidden');
     anew.classList.remove('hidden');
@@ -337,9 +439,24 @@ function randomFloat(min, max) {
 
 //Перемешивание массива
 function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+    let currentIndex = array.length, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
+
     return array;
+
+    // for (let i = array.length - 1; i > 0; i--) {
+    //     const j = Math.floor(Math.random() * (i + 1));
+    //     [array[i], array[j]] = [array[j], array[i]];
+    // }
+    // return array;
 }

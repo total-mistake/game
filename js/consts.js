@@ -49,50 +49,16 @@ const animalTypes = ["кошачьих", "парнокопытных", "птиц
 const animalTypes2 = ["две", "четыре"]
 
 const plants = [
-    {
-        path: "./elements/level-2/plant0.png",
-        pot: false
-    },
-    {
-        path: "./elements/level-2/plant1.png",
-        pot: true
-    },
-    {
-        path: "./elements/level-2/plant2.png",
-        pot: true
-    },
-    {
-        path: "./elements/level-2/plant3.png",
-        pot: true
-    },
-    {
-        path: "./elements/level-2/plant4.png",
-        pot: false
-    },
-    {
-        path: "./elements/level-2/plant5.png",
-        pot: false
-    },
-    {
-        path: "./elements/level-2/plant6.png",
-        pot: true
-    },
-    {
-        path: "./elements/level-2/plant7.png",
-        pot: true
-    },
-    {
-        path: "./elements/level-2/plant8.png",
-        pot: true
-    },
-    {
-        path: "./elements/level-2/plant9.png",
-        pot: true
-    },
-    {
-        path: "./elements/level-2/plant10.png",
-        pot: false
-    }
+    "./elements/level-2/plant0.png",
+    "./elements/level-2/plant1.png",
+    "./elements/level-2/plant2.png",
+    "./elements/level-2/plant3.png",
+    "./elements/level-2/plant4.png",
+    "./elements/level-2/plant5.png",
+    "./elements/level-2/plant6.png",
+    "./elements/level-2/plant7.png",
+    "./elements/level-2/plant9.png",
+    "./elements/level-2/plant10.png",
 ]
 
 const backgroundColors = [

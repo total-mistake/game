@@ -80,6 +80,14 @@ input:focus {
 }
 
 #rools{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-height: 100px;
+}
+
+#assignment{
     margin: 10px 0;
     font-size: 0.8em;
 }
@@ -111,9 +119,14 @@ input:focus {
     border-radius: 30px;
 }
 
-img{
+#level_field img{
     height: 130px;
     width: 130px;
+}
+
+#rools img{
+    height: 100px;
+    width: 100px;
 }
 
 .element{
