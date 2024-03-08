@@ -117,12 +117,11 @@ input:focus {
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.468);
     border-radius: 30px;
+    /* width: 1000px;
+    height: 550px; */
 }
 
-#level_field img{
-    height: 130px;
-    width: 130px;
-}
+
 
 #rools img{
     height: 100px;
@@ -161,6 +160,28 @@ input:focus {
     color: var(--tex-color-message);
     background-color: white;
     width: 30%;
+}
+
+#flowers-container{
+    position: relative;
+    height: 500px;
+    width: 1000px;
+    overflow: hidden;
+
+}
+
+#vase{
+    position: absolute;
+    height: 210px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flower{
+    height: 110px;
+    position: absolute; 
+    cursor: grab;
 }
 
 /* Анимации */

@@ -59,6 +59,23 @@ const plants = [
     "./elements/level-2/plant7.png",
     "./elements/level-2/plant8.png",
     "./elements/level-2/plant9.png",
+    "./elements/level-2/plant10.png",
+    "./elements/level-2/plant11.png"
+]
+
+const flowersIMG = [
+    "./elements/level-3/flower0.png",
+    "./elements/level-3/flower1.png",
+    "./elements/level-3/flower2.png",
+    "./elements/level-3/flower3.png",
+    "./elements/level-3/flower4.png",
+    "./elements/level-3/flower5.png",
+    "./elements/level-3/flower6.png",
+    "./elements/level-3/flower7.png",
+    "./elements/level-3/flower8.png",
+    "./elements/level-3/flower9.png",
+    "./elements/level-3/flower10.png",
+    "./elements/level-3/flower11.png"
 ]
 
 const backgroundColors = [
