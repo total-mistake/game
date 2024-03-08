@@ -422,8 +422,6 @@ function removeAnimationStyle(animationName) {
 
 function endOfGame(pointslvl1, pointslvl2, pointslvl3) {
     level_num.textContent = `Поздравляю! Количество набранных очков: ${pointslvl1 + pointslvl2 + pointslvl3}`;
-    console.log(level);
-    console.log(factLevel);
     timer.classList.add('hidden');
     level_field.classList.add('hidden');
     anew.classList.remove('hidden');
