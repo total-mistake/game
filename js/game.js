@@ -248,7 +248,6 @@ function thirdLevel() {
             level_field.classList.add('hidden');
             remaining_flowers = numFlowers[levelIndex];
             let flowers_container = $('flowers-container');
-            console.log(remaining_flowers);
 
             delayCorrection(3);
             setTimeout(() => {
