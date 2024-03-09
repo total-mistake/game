@@ -591,11 +591,13 @@ function makeMistake() {
 
 //Корректирует задержку при показе текста задания, чтобы это время не учитывалось
 function delayCorrection(sec) {
+    console.log(timeRemaining);
     timeRemaining = timeRemaining + sec;
     updateTimer();
 }
 
 function stopTimer() {
+    console.log(timeRemaining);
     clearInterval(timerInterval); // Останавливаем таймер
 }
 
