@@ -458,7 +458,7 @@ function endOfGame(pointslvl1, pointslvl2, pointslvl3) {
 }
 
 $('no').addEventListener('click', ()=>{
-    window.location.href = 'menu.html';
+    window.location.href = 'index.html';
 });
 
 //Оформление страницы
