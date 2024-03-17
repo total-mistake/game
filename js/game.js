@@ -64,7 +64,7 @@ function firstLevel() {
     let maxAnimationTime = [8, 5, 2];
     let taskTypes = shuffleArray([0, 1, 2]);
 
-    function generateNextLevel() {
+    function nextLevelGeneration() {
         if (levelIndex < 3) {
             timer.classList.add('hidden');
             level_field.classList.add('hidden');
@@ -135,7 +135,7 @@ function firstLevel() {
                     if (numOfCorrectItems == 0) {
                         clearField();
                         levelIndex++;
-                        generateNextLevel();
+                        nextLevelGeneration();
                     }
                 });
             });
@@ -159,7 +159,7 @@ function firstLevel() {
             }
             endOfGame(points, 0, 0)
     }}
-    generateNextLevel();
+    nextLevelGeneration();
 }
 
 function secondLevel() {
